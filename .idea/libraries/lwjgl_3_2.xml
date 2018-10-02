@@ -3,8 +3,24 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl/lwjgl.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl-openal/lwjgl-openal.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl-stb" />
+      <root url="jar://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl/lwjgl-natives-windows.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl/lwjgl-natives-macos.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl/lwjgl-natives-linux.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl-openal/lwjgl-openal-natives-linux.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl-openal/lwjgl-openal-natives-macos.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl-openal/lwjgl-openal-natives-windows.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl/lwjgl-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl-openal/lwjgl-openal-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl-stb" />
+      <root url="jar://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl/lwjgl-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl-openal/lwjgl-openal-sources.jar!/" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl-stb" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../lwjgl-3.2.0/lwjgl-stb" recursive="false" type="SOURCES" />
   </library>
 </component>

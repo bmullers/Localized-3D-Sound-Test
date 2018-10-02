@@ -1,28 +1,22 @@
-import org.lwjgl.openal.*;
-import org.lwjgl.openal.AL;
-import org.lwjgl.openal.ALC;
-import org.lwjgl.openal.ALC10;
+import java.awt.*;
+import java.nio.ByteBuffer;
+import org.lwjgl.openal.ALC10.*;
 
-import static org.lwjgl.openal.AL10.AL_TRUE;
-import static org.lwjgl.openal.AL10.alGetError;
-import static org.lwjgl.openal.ALC10.*;
+import static org.lwjgl.openal.ALC10.alcCloseDevice;
 
 public class Main {
-    public void main(String[] args) throws RuntimeException{
-        //Retrieving default device name
-        if(alcIsExtensionPresent(Long.parseLong(null), "ALC_ENUMERATION_EXT")){
-            System.out.println("Yes");
-        }else throw new RuntimeException("No");
+    public static void main(String[] args){
+        //Initializing OpenAL components
+        OpenALInit.init();
+        System.out.println("E");
 
-        String defaultDeviceName = alcGetString(Long.parseLong(null), ALC_DEFAULT_DEVICE_SPECIFIER);
+        //Creating a new window and displaying it
+        EventQueue.invokeLater(() -> {
+            Window window = new Window();
+            window.setVisible(true);
+        });
 
-        //Initalizing device
-        if(alcOpenDevice(defaultDeviceName) == ALC_TRUE){
-            System.out.println("Successfully opened default device");
-        }else throw new RuntimeException("Error : couldn't open default device");
+        alcCloseDevice(new Long(null));
 
-
-        //Initializing buffers
-        alGetError();
     }
 }
