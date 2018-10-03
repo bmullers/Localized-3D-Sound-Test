@@ -89,10 +89,40 @@ public class OpenALInit {
         //No error handling because i'm lazy
 
         //Attaching the buffer to all sources
-        alSourcei(sources[0],AL_BUFFER,buffers[0]);
-        alSourcei(sources[1],AL_BUFFER,buffers[0]);
-        alSourcei(sources[2],AL_BUFFER,buffers[0]);
-        alSourcei(sources[3],AL_BUFFER,buffers[0]);
+        alSourcei(sources[0],AL_BUFFER,buffers[0]); //source located on the left of the listener
+        alSourcei(sources[1],AL_BUFFER,buffers[0]); //located on the right
+        alSourcei(sources[2],AL_BUFFER,buffers[0]); //located in front
+        alSourcei(sources[3],AL_BUFFER,buffers[0]); //located in the back
         //Again, no error handling
+
+        //We create our listener
+        //TODO : not be lazy and handle errors
+        float[] listenerPos = {0.0f,0.0f,0.0f};
+        float[] listenerVel = {0.0f,0.0f,0.0f};
+        float[] listenerOri = {0.0f,0.0f,-1.0f,0.0f,1.0f,0.0f};
+        alListenerfv(AL_POSITION,listenerPos);
+        //error handling to be added here
+        alListenerfv(AL_VELOCITY,listenerVel);
+        //and here
+        alListenerfv(AL_ORIENTATION,listenerOri);
+
+        //Now we locate our sources in a 3D space, set their velocity and direction
+        //TODO: method to do this sh*te
+        alSource3f(sources[0],AL_POSITION,-1.0f,0.0f,0.0f);
+        alSource3f(sources[1],AL_POSITION,1.0f,0.0f,0.0f);
+        alSource3f(sources[2],AL_POSITION,0.0f,-1.0f,0.0f);
+        alSource3f(sources[3],AL_POSITION,0.0f,1.0f,0.0f);
+
+        alSource3f(sources[0],AL_VELOCITY,0.0f,0.0f,0.0f);
+        alSource3f(sources[1],AL_VELOCITY,0.0f,0.0f,0.0f);
+        alSource3f(sources[2],AL_VELOCITY,0.0f,0.0f,0.0f);
+        alSource3f(sources[3],AL_VELOCITY,0.0f,0.0f,0.0f);
+
+        alSource3f(sources[0],AL_DIRECTION,0.0f,0.0f,0.0f);
+        alSource3f(sources[1],AL_DIRECTION,0.0f,0.0f,0.0f);
+        alSource3f(sources[2],AL_DIRECTION,0.0f,0.0f,0.0f);
+        alSource3f(sources[3],AL_DIRECTION,0.0f,0.0f,0.0f);
+
+
     }
 }
