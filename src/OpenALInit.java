@@ -110,8 +110,8 @@ public class OpenALInit {
         //TODO: method to do this sh*te
         alSource3f(sources[0],AL_POSITION,-1.0f,0.0f,0.0f);
         alSource3f(sources[1],AL_POSITION,1.0f,0.0f,0.0f);
-        alSource3f(sources[2],AL_POSITION,0.0f,-1.0f,0.0f);
-        alSource3f(sources[3],AL_POSITION,0.0f,1.0f,0.0f);
+        alSource3f(sources[2],AL_POSITION,0.0f,1.0f,0.0f);
+        alSource3f(sources[3],AL_POSITION,0.0f,-1.0f,0.0f);
 
         alSource3f(sources[0],AL_VELOCITY,0.0f,0.0f,0.0f);
         alSource3f(sources[1],AL_VELOCITY,0.0f,0.0f,0.0f);

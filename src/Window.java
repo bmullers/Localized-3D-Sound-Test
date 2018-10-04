@@ -1,4 +1,8 @@
+import SliderChangeListeners.SliderPitchChangeListener;
+
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,7 +13,7 @@ public class Window extends JFrame{
 
     public Window(){
         setTitle("Localized 3D Sound Test");
-        setSize(900,600);
+        setSize(900,625);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -17,11 +21,14 @@ public class Window extends JFrame{
         Container container = this.getContentPane();
         container.setLayout(null);
 
-        /*JLabel labelTop = new JLabel();
+        //Labels used to hold tools to test out source properties
+        //One for each source
+        JLabel labelTop = new JLabel("TOP AUDIO SOURCE PROPERTIES");
         JLabel labelBot = new JLabel();
         JLabel labelLeft = new JLabel();
         JLabel labelRight = new JLabel();
-        add(labelTop); labelTop.setBounds(300,0,300,200);*/
+        add(labelTop); labelTop.setBounds(600,0,300,200);
+
         //the buttons corresponding to the audio sources
         JButton leftButton = new JButton("LEFT");leftButton.setBounds(0,200,300,200);add(leftButton);
         JButton rightButton = new JButton("RIGHT");rightButton.setBounds(600,200,300,200);add(rightButton);
@@ -41,6 +48,21 @@ public class Window extends JFrame{
         bottomButton.addActionListener((ActionEvent event) -> {
             alSourcePlay(OpenALInit.sources[3]);
         });
+
+        //The various sliders used to modify source properties
+        JSlider topPitch = new JSlider(JSlider.HORIZONTAL,0,20,10);
+        topPitch.addChangeListener(new SliderPitchChangeListener(OpenALInit.sources[2]));
+
+        JLabel topPitchLabel = new JLabel("Pitch");
+        labelTop.add(topPitchLabel);
+        topPitchLabel.setBounds(0,0,300,50);
+        topPitchLabel.add(topPitch);
+        topPitch.setVisible(true);
+        topPitch.setMajorTickSpacing(5);
+        topPitch.setMinorTickSpacing(1);
+        topPitch.setPaintTicks(true);
+        topPitch.setBounds(40,0,260,50);
+
     }
 
 }
