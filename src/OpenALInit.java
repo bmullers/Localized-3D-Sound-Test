@@ -123,6 +123,9 @@ public class OpenALInit {
         alSource3f(sources[2],AL_DIRECTION,0.0f,0.0f,0.0f);
         alSource3f(sources[3],AL_DIRECTION,0.0f,0.0f,0.0f);
 
+        //Increasing max gain to 2
+        alSourcef(sources[2],AL_MAX_GAIN,2.0f);
+
 
     }
 }

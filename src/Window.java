@@ -1,3 +1,4 @@
+import SliderChangeListeners.SliderGainChangeListener;
 import SliderChangeListeners.SliderPitchChangeListener;
 
 import javax.swing.*;
@@ -50,6 +51,8 @@ public class Window extends JFrame{
         });
 
         //The various sliders used to modify source properties
+
+        //The pitch-modifying sliders
         JSlider topPitch = new JSlider(JSlider.HORIZONTAL,0,20,10);
         topPitch.addChangeListener(new SliderPitchChangeListener(OpenALInit.sources[2]));
 
@@ -63,6 +66,19 @@ public class Window extends JFrame{
         topPitch.setPaintTicks(true);
         topPitch.setBounds(40,0,260,50);
 
+        //The gain modifying sliders
+        JSlider topGain = new JSlider(JSlider.HORIZONTAL,0,20,10);
+        topGain.addChangeListener(new SliderGainChangeListener(OpenALInit.sources[2]));
+
+        JLabel topGainLabel = new JLabel("Gain");
+        labelTop.add(topGainLabel);
+        topGainLabel.setBounds(0,50,300,50);
+        topGainLabel.add(topGain);
+        topGain.setVisible(true);
+        topGain.setMajorTickSpacing(5);
+        topGain.setMinorTickSpacing(1);
+        topGain.setPaintTicks(true);
+        topGain.setBounds(40,0,260,50);
     }
 
 }
