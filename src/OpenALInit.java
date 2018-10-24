@@ -13,6 +13,7 @@ import static org.lwjgl.openal.AL10.AL_BUFFER;
 import static org.lwjgl.openal.AL10.alSourcei;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.openal.ALC10.ALC_TRUE;
+import static org.lwjgl.openal.EXTEfx.ALC_MAX_AUXILIARY_SENDS;
 import static org.lwjgl.stb.STBVorbis.stb_vorbis_decode_filename;
 import static org.lwjgl.system.MemoryStack.stackMallocInt;
 import static org.lwjgl.system.MemoryStack.stackPop;
@@ -24,8 +25,8 @@ public class OpenALInit {
     public static void init(){
         //Retrieving default device name
         if(alcIsExtensionPresent(NULL, "ALC_ENUMERATION_EXT")){
-            System.out.println("Yes");
-        }else throw new RuntimeException("No");
+            System.out.println("Enumeration extension :  OK");
+        }else throw new RuntimeException("Enumeration extension : KO");
 
         String defaultDeviceName = alcGetString(NULL, ALC_DEVICE_SPECIFIER);
         System.out.println("Default device name : " +defaultDeviceName);
@@ -33,16 +34,31 @@ public class OpenALInit {
         long device = alcOpenDevice(defaultDeviceName);
         if(device != NULL){
             System.out.println("Successfully opened default device");
-            int[] attributes = {0};
-            long context = alcCreateContext(device,attributes);
-            alcMakeContextCurrent(context);
-            ALCCapabilities alcCapabilities = ALC.createCapabilities(device);
-            ALCapabilities alCapabilities = AL.createCapabilities(alcCapabilities);
         }else throw new RuntimeException("Error : couldn't open default device");
 
+        //Testing if the device driver supports the effects extension
+        if(alcIsExtensionPresent(device, "ALC_EXT_EFX")){
+            System.out.println("Effects extension supported by driver");
+        }else throw new RuntimeException("HELPE ME I FAILED INSTALL LOLE!!!");
+
+        //While creating the context we request 1 auxiliary send per source
+        int[] attributes = {0};
+        long context = alcCreateContext(device,attributes);
+        System.out.println("lemme get a uuuhh context");
+
+        //Now we make this context the current one
+        alcMakeContextCurrent(context);
+        ALCCapabilities alcCapabilities = ALC.createCapabilities(device);
+        ALCapabilities alCapabilities = AL.createCapabilities(alcCapabilities);
+        System.out.println("Succesfully created and set context");
+
+        //We retrieve the actual number of aux sends available for each source
+        int[] sends = {0};
+        alcGetIntegerv(device,ALC_MAX_AUXILIARY_SENDS,sends);
+        System.out.println("Device supports " + sends[0] +" Aux sends per source");
 
         //Initializing buffers
-        //alGetError();//clearing error message
+        alGetError();//clearing error message
 
         int[] buffers = new int[1];
         alGenBuffers(buffers);

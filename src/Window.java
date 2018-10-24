@@ -38,7 +38,6 @@ public class Window extends JFrame{
 
         leftButton.addActionListener((ActionEvent event) -> {
             alSourcePlay(OpenALInit.sources[0]);
-            System.out.println("LEFT");
         });
         rightButton.addActionListener((ActionEvent event) -> {
             alSourcePlay(OpenALInit.sources[1]);
@@ -79,6 +78,7 @@ public class Window extends JFrame{
         topGain.setMinorTickSpacing(1);
         topGain.setPaintTicks(true);
         topGain.setBounds(40,0,260,50);
+
     }
 
 }
