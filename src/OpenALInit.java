@@ -11,9 +11,10 @@ import static java.sql.Types.NULL;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.AL10.AL_BUFFER;
 import static org.lwjgl.openal.AL10.alSourcei;
+import static org.lwjgl.openal.AL11.alSource3i;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.openal.ALC10.ALC_TRUE;
-import static org.lwjgl.openal.EXTEfx.ALC_MAX_AUXILIARY_SENDS;
+import static org.lwjgl.openal.EXTEfx.*;
 import static org.lwjgl.stb.STBVorbis.stb_vorbis_decode_filename;
 import static org.lwjgl.system.MemoryStack.stackMallocInt;
 import static org.lwjgl.system.MemoryStack.stackPop;
@@ -41,7 +42,7 @@ public class OpenALInit {
             System.out.println("Effects extension supported by driver");
         }else throw new RuntimeException("HELPE ME I FAILED INSTALL LOLE!!!");
 
-        //While creating the context we request 1 auxiliary send per source
+        //Creating the context
         int[] attributes = {0};
         long context = alcCreateContext(device,attributes);
         System.out.println("lemme get a uuuhh context");
@@ -142,6 +143,50 @@ public class OpenALInit {
         //Increasing max gain to 2
         alSourcef(sources[2],AL_MAX_GAIN,2.0f);
 
+        //Now let's create an effect slot
+        alGetError();
+        System.out.println("beep");
+        int uiEffectSlot = alGenAuxiliaryEffectSlots();
+        if(alGetError() != AL_NO_ERROR){
+            System.out.println("An error occured while generating an effect slot");
+            return;
+        }
+        System.out.println("Successfully generated an effect slot");
+
+        //And create an effect
+        int uiEffect = alGenEffects();//is this even how it's done???
+        if(alGetError() != AL_NO_ERROR){
+            System.out.println("An error occured while generating an effect");
+            return;
+        }
+        if (alIsEffect(uiEffect)) System.out.println("Successfully generated an effect");
+        else System.out.println("Couldn't generate an effect soz ma boi");
+
+        //Setting the effect to reverb
+        alGetError();
+        alEffecti(uiEffect,AL_EFFECT_TYPE,AL_EFFECT_REVERB);
+        if(alGetError() != AL_NO_ERROR){
+            System.out.println("Error : reverb not supported");
+            return;
+        }
+        alEffectf(uiEffect,AL_REVERB_DECAY_TIME,5.0f);
+
+        //Attaching the effect to the effect slot
+        alGetError();
+        alAuxiliaryEffectSloti(uiEffectSlot,AL_EFFECTSLOT_EFFECT,uiEffect);
+        if(alGetError() != AL_NO_ERROR){
+            System.out.println("Error : could not attach the effect to the effect slot");
+            return;
+        }
+
+        //Now our effect is set up. We need to configure an auxiliary send on a source
+        //For the sake of simplicity, it will only be attached to source 0
+        alGetError();
+        alSource3i(sources[0],AL_AUXILIARY_SEND_FILTER,uiEffectSlot,0,NULL);
+        int e = alGetError();
+        if(e != AL_NO_ERROR){
+            System.out.println("Error " + e + " : couldn't set source 0 to feed the effect slot");
+        }
 
     }
 }

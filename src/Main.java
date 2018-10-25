@@ -8,7 +8,6 @@ public class Main {
     public static void main(String[] args){
         //Initializing OpenAL components
         OpenALInit.init();
-        System.out.println("E");
 
         //Creating a new window and displaying it
         EventQueue.invokeLater(() -> {
