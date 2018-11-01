@@ -24,11 +24,14 @@ public class Window extends JFrame{
 
         //Labels used to hold tools to test out source properties
         //One for each source
-        JLabel labelTop = new JLabel("TOP AUDIO SOURCE PROPERTIES");
+        JLabel labelTop = new JLabel();
         JLabel labelBot = new JLabel();
         JLabel labelLeft = new JLabel();
         JLabel labelRight = new JLabel();
         add(labelTop); labelTop.setBounds(600,0,300,200);
+        add(labelBot); labelBot.setBounds(0,400,300,200);
+        add(labelLeft); labelLeft.setBounds(0,0,300,200);
+        add(labelRight); labelRight.setBounds(600,400,300,200);
 
         //the buttons corresponding to the audio sources
         JButton leftButton = new JButton("LEFT");leftButton.setBounds(0,200,300,200);add(leftButton);
@@ -51,33 +54,11 @@ public class Window extends JFrame{
 
         //The various sliders used to modify source properties
 
-        //The pitch-modifying sliders
-        JSlider topPitch = new JSlider(JSlider.HORIZONTAL,0,20,10);
-        topPitch.addChangeListener(new SliderPitchChangeListener(OpenALInit.sources[2]));
+        ParameterFrame topLeftPF = new ParameterFrame(OpenALInit.sources[2],labelTop,"Top Source Properties");
+        topLeftPF.addSlider(ParameterFrame.PITCH);
+        topLeftPF.addSlider(ParameterFrame.GAIN);
 
-        JLabel topPitchLabel = new JLabel("Pitch");
-        labelTop.add(topPitchLabel);
-        topPitchLabel.setBounds(0,0,300,50);
-        topPitchLabel.add(topPitch);
-        topPitch.setVisible(true);
-        topPitch.setMajorTickSpacing(5);
-        topPitch.setMinorTickSpacing(1);
-        topPitch.setPaintTicks(true);
-        topPitch.setBounds(40,0,260,50);
 
-        //The gain modifying sliders
-        JSlider topGain = new JSlider(JSlider.HORIZONTAL,0,20,10);
-        topGain.addChangeListener(new SliderGainChangeListener(OpenALInit.sources[2]));
-
-        JLabel topGainLabel = new JLabel("Gain");
-        labelTop.add(topGainLabel);
-        topGainLabel.setBounds(0,50,300,50);
-        topGainLabel.add(topGain);
-        topGain.setVisible(true);
-        topGain.setMajorTickSpacing(5);
-        topGain.setMinorTickSpacing(1);
-        topGain.setPaintTicks(true);
-        topGain.setBounds(40,0,260,50);
 
     }
 
