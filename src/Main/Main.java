@@ -1,3 +1,5 @@
+package Main;
+
 import java.awt.*;
 import java.nio.ByteBuffer;
 import org.lwjgl.openal.ALC10.*;

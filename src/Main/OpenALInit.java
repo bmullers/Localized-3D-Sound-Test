@@ -1,3 +1,5 @@
+package Main;
+
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALC;
 import org.lwjgl.openal.ALCCapabilities;
@@ -156,7 +158,7 @@ public class OpenALInit {
         System.out.println("Successfully generated an effect slot");
 
         //And create an effect
-        int uiEffect = alGenEffects();//is this even how it's done???
+        int uiEffect = alGenEffects();
         if(alGetError() != AL_NO_ERROR){
             System.out.println("An error occured while generating an effect");
             return;
@@ -171,7 +173,7 @@ public class OpenALInit {
             System.out.println("Error : reverb not supported");
             return;
         }
-        alEffectf(uiEffect,AL_REVERB_DECAY_TIME,5.0f);
+        alEffectf(uiEffect,AL_REVERB_DECAY_TIME,3.0f);
 
         //Attaching the effect to the effect slot
         alGetError();

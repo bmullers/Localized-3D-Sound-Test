@@ -1,13 +1,14 @@
-import SliderChangeListeners.SliderGainChangeListener;
-import SliderChangeListeners.SliderPitchChangeListener;
+package Main;
+
+import CustomChangeListeners.CheckBoxReverbChangeListener;
+import CustomChangeListeners.SliderGainChangeListener;
+import CustomChangeListeners.SliderPitchChangeListener;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
 
 import static java.awt.Component.CENTER_ALIGNMENT;
-import static java.awt.Component.LEFT_ALIGNMENT;
 import static java.awt.Component.RIGHT_ALIGNMENT;
 
 /**
@@ -17,12 +18,13 @@ import static java.awt.Component.RIGHT_ALIGNMENT;
  */
 
 public class ParameterFrame {
-    private int source;
+    private Source source;
     private JLabel label;
     public static int PITCH = 1;
     public static int GAIN = 2;
+    public static int REVERB = 3;
 
-    public ParameterFrame(int s, JLabel l,String t){
+    public ParameterFrame(Source s, JLabel l,String t){
         source = s;
         label = l;
         label.setLayout(new BoxLayout(label,BoxLayout.Y_AXIS));
@@ -69,6 +71,19 @@ public class ParameterFrame {
         sliderLabel.add(typeText, BorderLayout.LINE_START);
         sliderLabel.add(slider, BorderLayout.CENTER);
         label.add(sliderLabel);
+    }
+
+    public void addCheckBox(int type){
+        JCheckBox checkBox = new JCheckBox();
+        checkBox.setSelected(false);
+        switch (type){
+            case 3 : checkBox.setText("Activate Reverb Effect");
+                checkBox.addChangeListener(new CheckBoxReverbChangeListener(source));
+                break;
+            default : System.out.println("Error : Invalid CheckBox type");
+                return;
+        }
+        //Do stuff
     }
 
 }
