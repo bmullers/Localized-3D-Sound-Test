@@ -140,12 +140,14 @@ public class OpenALInit {
         alSource3f(sources[2],AL_DIRECTION,0.0f,0.0f,0.0f);
         alSource3f(sources[3],AL_DIRECTION,0.0f,0.0f,0.0f);
 
-        //Increasing max gain to 2
-        alSourcef(sources[2],AL_MAX_GAIN,2.0f);
+        //Increasing max gain to 4
+        alSourcef(sources[0],AL_MAX_GAIN,4.0f);
+        alSourcef(sources[1],AL_MAX_GAIN,4.0f);
+        alSourcef(sources[2],AL_MAX_GAIN,4.0f);
+        alSourcef(sources[3],AL_MAX_GAIN,4.0f);
 
         //Now let's create an effect slot
         alGetError();
-        System.out.println("beep");
         int uiEffectSlot = alGenAuxiliaryEffectSlots();
         if(alGetError() != AL_NO_ERROR){
             System.out.println("An error occured while generating an effect slot");

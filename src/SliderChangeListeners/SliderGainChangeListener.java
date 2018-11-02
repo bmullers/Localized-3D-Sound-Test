@@ -25,7 +25,7 @@ public class SliderGainChangeListener implements ChangeListener{
     }
 
     private float modifiedGain(int input){
-        return (float) (input / 10) ;
+        return (float) input / 5 ;
     }
 
 }

@@ -52,13 +52,25 @@ public class Window extends JFrame{
             alSourcePlay(OpenALInit.sources[3]);
         });
 
-        //The various sliders used to modify source properties
+        //This creates a ParameterFrame object to allow us to easily add any slider in our label
+        ParameterFrame topPF = new ParameterFrame(OpenALInit.sources[2],labelTop,"Front Source Properties");
 
-        ParameterFrame topLeftPF = new ParameterFrame(OpenALInit.sources[2],labelTop,"Top Source Properties");
-        topLeftPF.addSlider(ParameterFrame.PITCH);
-        topLeftPF.addSlider(ParameterFrame.GAIN);
+        //Adding the sliders
+        topPF.addSlider(ParameterFrame.PITCH);
+        topPF.addSlider(ParameterFrame.GAIN);
 
+        //And so on...
+        ParameterFrame leftPF = new ParameterFrame(OpenALInit.sources[0],labelLeft,"Left Source Properties");
+        leftPF.addSlider(ParameterFrame.PITCH);
+        leftPF.addSlider(ParameterFrame.GAIN);
 
+        ParameterFrame botPF = new ParameterFrame(OpenALInit.sources[3],labelBot,"Back Source Properties");
+        botPF.addSlider(ParameterFrame.PITCH);
+        botPF.addSlider(ParameterFrame.GAIN);
+
+        ParameterFrame rightPF = new ParameterFrame(OpenALInit.sources[1],labelRight,"Right Source Properties");
+        rightPF.addSlider(ParameterFrame.PITCH);
+        rightPF.addSlider(ParameterFrame.GAIN);
 
     }
 
